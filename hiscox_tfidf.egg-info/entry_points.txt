@@ -1,0 +1,2 @@
+[console_scripts]
+hiscox_tfidf = hiscox_tfidf.__main__:cli

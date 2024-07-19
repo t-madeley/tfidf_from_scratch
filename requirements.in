@@ -1,0 +1,12 @@
+black
+ipykernel
+isort
+loguru
+matplotlib
+nltk
+numpy
+pandas
+pyarrow
+pydocstyle
+pytest-cov
+seaborn
