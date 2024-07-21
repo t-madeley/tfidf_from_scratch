@@ -1,6 +1,6 @@
 """Module to contain utility functions."""
 
-from typing import Dict, List, Union
+from typing import Dict, List
 
 import nltk
 import pandas as pd
@@ -10,15 +10,14 @@ from hiscox_tfidf.constants import RESOURCES
 
 
 def check_and_download_nltk_resources():
-    """Check and download necessary NLTK resources in constants.py."""
+    """Check and download necessary NLTK resources from constants.RESOURCES."""
     logger.info(f"Checking for NLTK resources: {RESOURCES}")
-
     for resource in RESOURCES:
 
         try:
             nltk.data.find(f"{resource}")
         except LookupError:
-            nltk.download(resource)
+            nltk.download(resource, quiet=True)
 
     logger.info(f"NLTK resources all present or downloaded successfully.")
 
@@ -27,6 +26,8 @@ def format_tfidf_matrix_scores(
     tfidf_matrix: List[List[float]], vocabulary: Dict[str, int]
 ) -> List[Dict[str, float]]:
     """Format a TF-IDF matrix as a list of dictionaries containing term: TF-IDF score pairs for each document.
+
+    This function allows the output embeddings to be interpreted by a human.
 
     Parameters
     ----------
