@@ -135,7 +135,7 @@ def compute_idf(
     document_counts: List[int],
     n_documents: int,
     smooth: bool = True,
-    add_one: bool = True,
+    add_one_sklearn_idf: bool = True,
 ) -> List[float]:
     """
     Compute the inverse document frequency (IDF) for each term in the given documents.
@@ -148,7 +148,7 @@ def compute_idf(
         The total number of documents in the corpus.
     smooth : bool, optional
         Whether to apply smoothing to the IDF values. If True, adds 1 to the document frequencies and the total number of documents. Default is True.
-    add_one : bool, optional
+    add_one_sklearn_idf : bool, optional
         Whether to add 1 to the IDF values. If True, adds 1 to the computed IDF values. Default is True.
 
     Returns
@@ -161,7 +161,7 @@ def compute_idf(
     else:
         idf = [math.log(n_documents / count) for count in document_counts]
 
-    if add_one:
+    if add_one_sklearn_idf:
         idf = [value + 1 for value in idf]
 
     return idf
@@ -234,7 +234,7 @@ def calculate_tfidf_vectors(
     tokenized_documents: List[List[str]],
     norm: str = "l1",
     smooth_idf: bool = True,
-    add_idf: bool = True,
+    add_one_sklearn_idf: bool = True,
 ) -> Tuple[List[List[float]], Dict[str, int]]:
     """Compute the TF-IDF scores for each term in the given tokenized documents and returns a matrix with the scores and the vocabulary.
 
@@ -249,8 +249,8 @@ def calculate_tfidf_vectors(
         - None: No normalization, user raw term counts
     smooth_idf : bool, optional
         Whether to apply smoothing to the IDF values. If True, adds 1 to the document frequencies and the total number of documents. Default is True.
-    add_idf : bool, optional
-        Whether to add 1 to the IDF values. If True, adds 1 to the computed IDF values. Default is True.
+    add_one_sklearn_idf : bool, optional
+        Whether to add 1 to the IDF values. If True, adds 1 to the computed IDF values from the sklearn implementation. Default is True.
 
     Returns
     -------
@@ -278,9 +278,9 @@ def calculate_tfidf_vectors(
     document_counts = get_document_counts(term_counts)
     n_documents = len(tokenized_documents)
     logger.info(
-        f"Calculating inverse document frequency matrix with smooth={smooth_idf}, add_one={add_idf}"
+        f"Calculating inverse document frequency matrix with smooth={smooth_idf}, add_one={add_one_sklearn_idf}"
     )
-    idf = compute_idf(document_counts, n_documents, smooth=smooth_idf, add_one=add_idf)
+    idf = compute_idf(document_counts, n_documents, smooth=smooth_idf, add_one_sklearn_idf=add_one_sklearn_idf)
 
     # Compute TF-IDF scores
     logger.info("Calculating TF-IDF score matrix")

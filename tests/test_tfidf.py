@@ -207,7 +207,7 @@ class TestCalculateTFIDFVectors(unittest.TestCase):
 
         # Call the function
         tfidf_matrix, term_to_index = calculate_tfidf_vectors(
-            tokenized_documents, norm=norm, smooth_idf=smooth_idf, add_idf=add_idf
+            tokenized_documents, norm=norm, smooth_idf=smooth_idf, add_one_sklearn_idf=add_idf
         )
 
         # Check the execution of subfunctions
@@ -218,7 +218,7 @@ class TestCalculateTFIDFVectors(unittest.TestCase):
         mock_compute_tf.assert_called()
         mock_get_document_counts.assert_called_once()
         mock_compute_idf.assert_called_once_with(
-            mock_get_document_counts.return_value, n_docs, smooth=False, add_one=False
+            mock_get_document_counts.return_value, n_docs, smooth=False, add_one_sklearn_idf=False
         )
         mock_compute_tfidf.assert_called_once()
         mock_normalize_tfidf.assert_called_once_with(

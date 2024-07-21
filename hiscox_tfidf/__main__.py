@@ -97,7 +97,7 @@ def main_calculate_tfidf(run_config: Dict[str, any] = RUN_CONFIG):
         tokenized_documents=preprocessed_corpus,
         norm=run_config.get("norm"),
         smooth_idf=run_config.get("smooth_idf"),
-        add_idf=run_config.get("add_idf"),
+        add_one_sklearn_idf=run_config.get("add_idf"),
     )
 
     logger.success("TF-IDF matrix calculated successfully")
