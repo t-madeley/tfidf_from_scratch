@@ -52,3 +52,11 @@ endif
 dev_install: _conda_env_check _install_pip_tools
 	pip-sync requirements.txt
 	$(PYTHON_INTERPRETER) -m pip install -e .
+
+## Lint using black
+lint:
+	black $(PROJECT_NAME)
+	black tests
+	isort --profile black $(PROJECT_NAME)
+	isort --profile black tests
+	pydocstyle $(PROJECT_NAME) -e --convention=numpy

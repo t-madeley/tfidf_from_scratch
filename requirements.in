@@ -1,5 +1,6 @@
 black
 ipykernel
+ipython_memory_usage
 isort
 loguru
 matplotlib

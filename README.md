@@ -42,3 +42,5 @@ This will use pip-tools to search for compatible versions of all dependencies, t
 
 
 ## If I Had More Time
+- Add more parameters to the functions
+  - N Grams
