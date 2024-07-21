@@ -17,6 +17,11 @@ def load_corpus_from_parquet(
         corpus_col in df.columns
     ), f"Required corpus column not found in dataset, please check your config. Found: {df.columns}"
     logger.info(f"Extracting corpus from column: {corpus_col}")
+
     corpus = df[corpus_col].tolist()
+
+    assert (
+        len(corpus) > 0
+    ), "No documents were found in the corpus, please check the input data."
 
     return corpus

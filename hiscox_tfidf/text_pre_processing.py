@@ -1,14 +1,11 @@
 """Module to contain text pre-processing functions."""
 
 import re
-from typing import Dict, List, Tuple
+from typing import List
 
-from loguru import logger
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 from nltk.tokenize import word_tokenize
-
-# TODO: Add logs
 
 
 def basic_text_preprocessing(document: str) -> str:
