@@ -18,12 +18,15 @@ Essentially, we need to reproduce the below calculation over a small set of docu
 
 ![tfidf_formula.png](images/tfidf_formula.png)
 
-**Note** We can optionally also follow the sklearn TF-IDF calculation using the below formula. This is done so I can 
+**Note** We can optionally also follow the sklearn TF-IDF calculation using the below formula. This is done so we can 
 evaluate and sense check my method against sklearn. 
 
 ![](images/sklearn_idf_formula.png)
 
 # Solution
+
+I will explain the solution fully during the interview, however there is a brief summary below and I hope that the code
+is somewhat self documenting as well. 
 
 The main components of the project are as follows:
 
@@ -153,3 +156,50 @@ make dev_install
 ```
 
 This will use pip-tools to search for compatible versions of all dependencies, then install the new dependencies in your conda environment. 
+
+
+
+# If I Had More Time...
+
+
+1. **Error Handling, & Testing** 
+- We have implement unit tests for the TF-IDF calculations, but testing the text preprocessing functions would give us more confidence in our outputs.
+- Our code may fall over if incorrect keys or values are passed in our run config or if unexpected values are found (div by 0 etc).
+  - We could add more error handling to control the pipelines behaviour when this happens.
+2. **Extending Functionality for New Texts and Refactoring**
+- A potential use case for this tool is calculating TF-IDF scores for new texts, currently we are unable to do this without full retraining. 
+  - We could refactor our code to an OOP format, creating a TF-IDF class. 
+    - This could hold the IDF matrix, and calculate TF-IDF scores for new texts without retraining. 
+    - We could implement more complex tokenisation to enable 'n-gram' 
+    - Add new arguments like min word/max word frequencies.
+    - We could parametrise the tokenisation and preprocessing steps:
+      - 'object_from_dict' to load custom tokenizer etc. 
+  - We could use the TF-IDF scores in many downstream processes and assess their performance:
+    - To compare vectors by calculating a similarity score. 
+    - Text summarisation
+    - Input into a supervised model etc
+3. **Performance Optimization - Out of scope**
+- While our current implementation works well for small to medium-sized datasets, it may struggle with larger corpora due to the use of Python lists and dictionaries.
+  - We could explore using NumPy arrays and SciPy sparse matrices to represent the term-document matrices more efficiently.
+    - NumPy arrays offer faster numerical computations and better memory efficiency compared to Python lists. We can enhance this further with Numba!
+    - SciPy sparse matrices are designed to handle large, sparse datasets, which is often the case with text data.
+4. **Evaluation and Benchmarking**
+- To assess the effectiveness and performance of our TF-IDF implementation, it would be valuable to conduct a comprehensive evaluation and benchmarking process.
+  - We did compare our implementation to the scikit-learn implementation, it would be nice to extend this comparison to a large corpus.
+  - Additionally, we could measure the runtime performance and memory usage of our implementation on different datasets and compare it with other libraries.
+5. **Documentation and Examples**
+- To facilitate the adoption and usage of our TF-IDF implementation, it is crucial to provide comprehensive documentation and illustrative examples.
+- I have tried to effectively document the process within the limited time available however, in practice I would prefer to do more:
+  - If this were a brand new algorithm:
+    - Provide worked examples in the documentation and even docstrings, explaining the transformations and calculations taking place.
+    - Put together notebooks executing the process in a stepwise manner.
+6. **Deployment**
+- While obviously out of scope, I would consider the following key aspects for deploying our TF-IDF implementation in a production environment:
+  - Build a Custom Python Package
+    - Package the implementation using standard Python packaging tools, such as setuptools or poetry.
+    - Deploy the package to a private PyPI server, allowing controlled access and versioning for internal use.
+  - Implement CI/CD with Version Control
+    - Establish a robust CI/CD pipeline to automate the build, testing, and deployment processes for our TF-IDF package like using a yaml file.
+    - Integrate version control, such as Git, to track changes, collaborate effectively, and maintain a clear history of the package's development.
+  - Peer Review and Code Quality
+    - Establish a peer review process to ensure high code quality and maintain consistency across the TF-IDF package.
