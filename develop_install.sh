@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PROJECT_NAME="hiscox_tfidf"
+PROJECT_NAME="tfidf_from_scratch"
 ZSH_BIN=$(which zsh)
 
 # source conda and activate environment

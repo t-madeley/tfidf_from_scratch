@@ -6,7 +6,7 @@ import nltk
 import pandas as pd
 from loguru import logger
 
-from hiscox_tfidf.constants import RESOURCES
+from tfidf_from_scratch.constants import RESOURCES
 
 
 def check_and_download_nltk_resources():

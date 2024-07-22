@@ -7,8 +7,8 @@ from loguru import logger
 from scipy.sparse import csr_matrix
 from sklearn.feature_extraction.text import TfidfVectorizer
 
-from hiscox_tfidf.datasets import load_corpus_from_parquet
-from hiscox_tfidf.text_pre_processing import perform_full_preprocessing_and_tokenize
+from tfidf_from_scratch.datasets import load_corpus_from_parquet
+from tfidf_from_scratch.text_pre_processing import perform_full_preprocessing_and_tokenize
 
 
 def sklearn_tfidf(run_config: Dict[str, Any]) -> Tuple[csr_matrix, Dict[str, int]]:

@@ -6,7 +6,7 @@ from unittest import mock
 
 import pytest
 
-from hiscox_tfidf.tfidf import (
+from tfidf_from_scratch.tfidf import (
     build_term_counts_matrix,
     build_vocabulary,
     calculate_tfidf_vectors,
@@ -171,13 +171,13 @@ def test_compute_tfidf(tf_matrix, idf_vector, expected_tfidf_matrix):
 
 
 class TestCalculateTFIDFVectors(unittest.TestCase):
-    @mock.patch("hiscox_tfidf.tfidf.normalize_tfidf_scores")
-    @mock.patch("hiscox_tfidf.tfidf.compute_tfidf")
-    @mock.patch("hiscox_tfidf.tfidf.compute_idf")
-    @mock.patch("hiscox_tfidf.tfidf.get_document_counts")
-    @mock.patch("hiscox_tfidf.tfidf.compute_tf")
-    @mock.patch("hiscox_tfidf.tfidf.build_term_counts_matrix")
-    @mock.patch("hiscox_tfidf.tfidf.build_vocabulary")
+    @mock.patch("tfidf_from_scratch.tfidf.normalize_tfidf_scores")
+    @mock.patch("tfidf_from_scratch.tfidf.compute_tfidf")
+    @mock.patch("tfidf_from_scratch.tfidf.compute_idf")
+    @mock.patch("tfidf_from_scratch.tfidf.get_document_counts")
+    @mock.patch("tfidf_from_scratch.tfidf.compute_tf")
+    @mock.patch("tfidf_from_scratch.tfidf.build_term_counts_matrix")
+    @mock.patch("tfidf_from_scratch.tfidf.build_vocabulary")
     def test_calculate_tfidf_vectors(
         self,
         mock_build_vocabulary,
