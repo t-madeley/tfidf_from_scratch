@@ -43,6 +43,7 @@ def calculate_tfidf_bau(config: str):
     else:
         with open(config, "r") as file:
             run_config = json.load(file)
+            logger.info(f"Loaded config from file successfully.")
 
     logger.info(f"Commencing TF-IDF calculation using config: {run_config}")
 
@@ -84,6 +85,8 @@ def main_calculate_tfidf(run_config: Dict[str, any] = RUN_CONFIG):
             The term-to-index mapping dictionary, where the keys are the unique terms in the corpus
             and the values are their corresponding indices in the TF-IDF matrix.
     """
+    logger.info(f"Commencing TF-IDF calculation using config: {run_config}")
+
     check_and_download_nltk_resources()
 
     corpus = load_corpus_from_parquet(run_config.get("path"))
@@ -97,7 +100,7 @@ def main_calculate_tfidf(run_config: Dict[str, any] = RUN_CONFIG):
         tokenized_documents=preprocessed_corpus,
         norm=run_config.get("norm"),
         smooth_idf=run_config.get("smooth_idf"),
-        add_one_sklearn_idf=run_config.get("add_idf"),
+        add_one_sklearn_idf=run_config.get("add_one_sklearn_idf"),
     )
 
     logger.success("TF-IDF matrix calculated successfully")

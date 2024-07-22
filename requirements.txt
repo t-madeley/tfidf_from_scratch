@@ -12,6 +12,7 @@ black==24.4.2
     # via -r requirements.in
 click==8.1.7
     # via
+    #   -r requirements.in
     #   black
     #   nltk
 comm==0.2.2
@@ -47,7 +48,9 @@ isort==5.13.2
 jedi==0.19.1
     # via ipython
 joblib==1.4.2
-    # via nltk
+    # via
+    #   nltk
+    #   scikit-learn
 jupyter-client==8.6.2
     # via ipykernel
 jupyter-core==5.7.2
@@ -81,6 +84,8 @@ numpy==1.26.4
     #   matplotlib
     #   pandas
     #   pyarrow
+    #   scikit-learn
+    #   scipy
     #   seaborn
 packaging==24.0
     # via
@@ -142,6 +147,12 @@ pyzmq==26.0.3
     #   jupyter-client
 regex==2024.5.15
     # via nltk
+scikit-learn==1.5.1
+    # via -r requirements.in
+scipy==1.14.0
+    # via
+    #   -r requirements.in
+    #   scikit-learn
 seaborn==0.13.2
     # via -r requirements.in
 six==1.16.0
@@ -152,6 +163,8 @@ snowballstemmer==2.2.0
     # via pydocstyle
 stack-data==0.6.3
     # via ipython
+threadpoolctl==3.5.0
+    # via scikit-learn
 tornado==6.4
     # via
     #   ipykernel

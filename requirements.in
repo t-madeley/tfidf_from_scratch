@@ -1,4 +1,5 @@
 black
+click
 ipykernel
 ipython_memory_usage
 isort
@@ -10,4 +11,6 @@ pandas
 pyarrow
 pydocstyle
 pytest-cov
+scikit-learn
+scipy
 seaborn
