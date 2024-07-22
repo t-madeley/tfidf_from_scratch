@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/hiscox_tfidf.iml" filepath="$PROJECT_DIR$/.idea/hiscox_tfidf.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/tfidf_from_scratch.iml" filepath="$PROJECT_DIR$/.idea/tfidf_from_scratch.iml" />
     </modules>
   </component>
 </project>

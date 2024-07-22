@@ -6,7 +6,7 @@ SHELL := /usr/bin/env bash
 #################################################################################
 
 PROJECT_DIR := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
-PROJECT_NAME := hiscox_tfidf
+PROJECT_NAME := tfidf_from_scratch
 PYTHON_INTERPRETER := $(shell which python)
 VERSION := $(shell $(PYTHON_INTERPRETER) setup.py --version)
 PIP_TOOLS_VERSION := 7.3.0

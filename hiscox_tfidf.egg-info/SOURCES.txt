@@ -1,9 +1,0 @@
-README.md
-setup.py
-hiscox_tfidf.egg-info/PKG-INFO
-hiscox_tfidf.egg-info/SOURCES.txt
-hiscox_tfidf.egg-info/dependency_links.txt
-hiscox_tfidf.egg-info/entry_points.txt
-hiscox_tfidf.egg-info/requires.txt
-hiscox_tfidf.egg-info/top_level.txt
-tests/test_tfidf.py

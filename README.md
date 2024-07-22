@@ -126,11 +126,11 @@ Both approaches require a `run_config` dictionary as input that contains all req
 
 ### Functional Usage
 
-To use the main function in a functional way, simply import the `hiscox_tfidf.__main__.main_calculate_tfidf` function
+To use the main function in a functional way, simply import the `tfidf_from_scratch.__main__.main_calculate_tfidf` function
 and use as follows:
 
 ```python
-from hiscox_tfidf.__main__ import main_calculate_tfidf
+from tfidf_from_scratch.__main__ import main_calculate_tfidf
 
 run_config = {
     "path": "path",
@@ -139,7 +139,6 @@ run_config = {
     "add_idf": True,
     "output_path": None,
 }
-
 
 tfidf_matrix, vocabulary = main_calculate_tfidf(run_config)
 ```
@@ -152,12 +151,12 @@ dictionary to be passed. There is a default configuration stored in `constants.R
 
 To use the default config, simply: 
 ```shell
-hiscox_tfidf calculate_tfidf
+tfidf_from_scratch calculate_tfidf
 ```
 
 To run with a custom run_config:
 ```shell
-hiscox_tfidf calculate_tfidf --config {path_to_json}.json
+tfidf_from_scratch calculate_tfidf --config {path_to_json}.json
 ```
 
 # If I Had More Time...

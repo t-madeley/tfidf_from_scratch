@@ -6,11 +6,11 @@ from typing import Dict
 import click
 from loguru import logger
 
-from hiscox_tfidf.constants import RUN_CONFIG
-from hiscox_tfidf.datasets import load_corpus_from_parquet
-from hiscox_tfidf.text_pre_processing import perform_full_preprocessing_and_tokenize
-from hiscox_tfidf.tfidf import calculate_tfidf_vectors
-from hiscox_tfidf.utils import (
+from tfidf_from_scratch.constants import RUN_CONFIG
+from tfidf_from_scratch.datasets import load_corpus_from_parquet
+from tfidf_from_scratch.text_pre_processing import perform_full_preprocessing_and_tokenize
+from tfidf_from_scratch.tfidf import calculate_tfidf_vectors
+from tfidf_from_scratch.utils import (
     check_and_download_nltk_resources,
     create_tfidf_dataframe_and_save,
 )
@@ -22,7 +22,7 @@ def cli() -> None:
 
     To start using it run a command like:
 
-    "hiscox_tfidf calculate_tfidf "
+    "tfidf_from_scratch calculate_tfidf "
 
     """
     pass
