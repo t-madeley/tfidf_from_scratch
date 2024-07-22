@@ -6,7 +6,7 @@ with open("requirements.txt", "r") as fh:
 setup(
     name="tfidf_from_scratch",
     version="0.0.1",
-    description="Hiscox TF-IDF From Scratch Take Home Task",
+    description="TF-IDF From Scratch Take Home Task",
     author="t-madeley",
     packages=find_packages(),
     install_requires=install_requires,
