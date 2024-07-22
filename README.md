@@ -75,7 +75,34 @@ and program algorithms from scratch. I enjoyed making it!
 
 ## Package usage
 
-**Note** Make sure you set up a suitable conda environment using the instructions below first. 
+## Set up and installation
+
+We have created a `Makefile` to house some helpful commands to manage dependencies and set up a suitable Conda environment. 
+
+You must have some form of Conda installed for this to work. 
+
+#### Create Environment and install the package in editable mode
+Run the command below from the root directory, and answer `y` when asked about installation of dependencies.
+
+This will automatically create a conda environment and ipykernel kernel for use in a jupyter notebook. 
+
+```shell
+make create_environment
+```
+
+If you need to update the dependencies, simply add the new package name(s) to `requirements.in` and then run:
+
+```shell
+make update_requirements
+
+make dev_install
+```
+
+This will use pip-tools to search for compatible versions of all dependencies, then install the new dependencies in your conda environment. 
+
+
+
+**Note** Make sure you set up a suitable conda environment using the instructions above first. 
 
 The package is configured to be runnable in a functional way (ie importing functions and running them), or with a command
 line interface, we will explain both usages below. 
@@ -132,32 +159,6 @@ To run with a custom run_config:
 ```shell
 hiscox_tfidf calculate_tfidf --config {path_to_json}.json
 ```
-## Set up and installation
-
-We have created a `Makefile` to house some helpful commands to manage dependencies and set up a suitable Conda environment. 
-
-You must have some form of Conda installed for this to work. 
-
-#### Create Environment and install the package in editable mode
-Run the command below from the root directory, and answer `y` when asked about installation of dependencies.
-
-This will automatically create a conda environment and ipykernel kernel for use in a jupyter notebook. 
-
-```shell
-make create_environment
-```
-
-If you need to update the dependencies, simply add the new package name(s) to `requirements.in` and then run:
-
-```shell
-make update_requirements
-
-make dev_install
-```
-
-This will use pip-tools to search for compatible versions of all dependencies, then install the new dependencies in your conda environment. 
-
-
 
 # If I Had More Time...
 
