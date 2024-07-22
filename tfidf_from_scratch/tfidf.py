@@ -160,7 +160,6 @@ def compute_idf(
         idf = [math.log((n_documents + 1) / (count + 1)) for count in document_counts]
     else:
         idf = [math.log(n_documents / count) for count in document_counts]
-
     if add_one_sklearn_idf:
         idf = [value + 1 for value in idf]
 
@@ -280,7 +279,12 @@ def calculate_tfidf_vectors(
     logger.info(
         f"Calculating inverse document frequency matrix with smooth={smooth_idf}, add_one={add_one_sklearn_idf}"
     )
-    idf = compute_idf(document_counts, n_documents, smooth=smooth_idf, add_one_sklearn_idf=add_one_sklearn_idf)
+    idf = compute_idf(
+        document_counts,
+        n_documents,
+        smooth=smooth_idf,
+        add_one_sklearn_idf=add_one_sklearn_idf,
+    )
 
     # Compute TF-IDF scores
     logger.info("Calculating TF-IDF score matrix")
