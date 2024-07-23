@@ -10,6 +10,6 @@ RUN_CONFIG = {
     "path": "data/documents.parquet",
     "norm": "l1",
     "smooth_idf": True,
-    "add_idf": True,
+    "add_one_sklearn_idf": True,
     "output_path": f"output/vectors_{datetime.now().strftime('%Y%m%d')}.parquet",
 }

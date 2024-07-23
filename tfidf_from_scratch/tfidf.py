@@ -5,6 +5,8 @@ from typing import Dict, List, Tuple
 
 from loguru import logger
 
+from tfidf_from_scratch.utils import ln_approximation
+
 
 def build_vocabulary(tokenized_documents: List[List[str]]) -> Tuple[List[str], int]:
     """
@@ -239,8 +241,8 @@ def calculate_tfidf_vectors(
 
     Parameters
     ----------
-    tokenized_documents : List[str]
-        A list of input documents as strings.
+    tokenized_documents : List[List[str]]
+        A list of input tokenized documents as lists of lists of strings.
     norm : str, optional
         The normalization scheme to use for term frequency AND TF-IDF scores. Possible values are:
         - 'l1': L1 normalization (default)
@@ -276,8 +278,9 @@ def calculate_tfidf_vectors(
     logger.info(f"Creating document counts.. ")
     document_counts = get_document_counts(term_counts)
     n_documents = len(tokenized_documents)
+
     logger.info(
-        f"Calculating inverse document frequency matrix with smooth={smooth_idf}, add_one={add_one_sklearn_idf}"
+        f"Calculating inverse document frequency matrix with smooth={smooth_idf}, add_one_sklearn_idf={add_one_sklearn_idf}"
     )
     idf = compute_idf(
         document_counts,

@@ -18,10 +18,51 @@ Essentially, we need to reproduce the below calculation over a small set of docu
 
 ![tfidf_formula.png](images/tfidf_formula.png)
 
-**Note** We can optionally also follow the sklearn TF-IDF calculation using the below formula. This is done so we can 
+### Additional Features
+
+1. **Scikit-Learn Implementation**
+
+We can optionally also follow the sklearn TF-IDF calculation using the below formula. This is done so we can 
 evaluate and sense check my method against sklearn. 
 
 ![](images/sklearn_idf_formula.png)
+
+- The smoothing factor prevents 0 division which may occur when using a vocabulary with terms with no usages.
+- We are essentially saying we have an extra document that contains all terms
+- We also add 1 to the IDF term to prevent terms in all documents have a 0 IDF score. (Full explanation below)
+
+2. **Normalisation of TF and TF-IDF Scores**
+
+We can optionally normalise both the Term Frequencies and TF-IDF Scores using L1 and L2 normalisation or no normalisation at all.
+
+- L1 Normalisation:
+  - Normalising the term frequency counts by the sum of the term counts: Term Frequencies sum to 1. 
+  - Normalising the TF-IDF scores by the sum of the TF-IDF scores: TF-IDF scores sum to 1. 
+- L2 Normalisation:
+  - Normalising the term frequency counts by the square root of the sum of the squared term counts: squared Term Frequencies sum to 1. 
+  - Normalising the TF-IDF scores by the sum of the TF-IDF scores: sum of squared TF-IDF scores sum to 1. 
+
+**Why Normalize TF-IDF Vectors?**
+
+- Consistency: It ensures that documents of different lengths are represented in a comparable manner.
+- Stability: It can improve the numerical stability and performance of algorithms that are sensitive to the magnitude of input vectors.
+- Cosine Similarity: Normalization, especially L2 normalization, is often used before computing cosine similarity between documents, as it simplifies the cosine similarity formula to a dot product.
+
+
+Consider two documents, a long one and a short one:
+Document A (short): 
+[1,2,1]
+Document B (long):
+[5,10,5]
+
+After L1 normalization:
+- Document A: [1/4, 2/4, 1/4] = [0.25, 0.5, 0.25]
+- Document B: [5/20, 10/20, 5/20] = [0.25, 0.5, 0.25]
+
+The cosine similarity calculation can be simplified to a dotproduct if we use L2 normalisation, as both terms on the denominator become 1. 
+
+<img src="images/cosine_sim.png" alt="Cosine Similarity" width="400"/>
+
 
 # Solution
 
@@ -49,12 +90,73 @@ calculates the TF-IDF scores, and saves the results to a file. This can be execu
 
 5. **Run Config**: The parameters required for a run are passed to the module as a dictionary or JSON file (instructions below).
 
-7. **Tests**: To ensure the correctness and reliability of the implementation, a comprehensive set of unit tests is 
+6. **Tests**: To ensure the correctness and reliability of the implementation, a comprehensive set of unit tests is 
 included in the `tests` directory. These tests only cover the `tfidf.py` module, in practice all project functions
 would be tested properly, with integration tests also. This is just an example of *how* I write tests.
 
+7. **CLI Interface**: The TF-IDF Calculation can be run from the command line with a simple call!
+
+```shell
+tfidf_from_scratch calculate_tfidf
+```
+
 The project also includes uses `pip-compile` for dependency management, instructions for setting up your environment 
 can be found below. 
+
+
+### Why does Sklearn Implement Smoothing and add one? 
+
+![](images/sklearn_idf_formula.png)
+
+
+What if we have an out of vocabulary term? This will raise a zero division error.
+```python
+#1 document with term with no counts (out of vocabulary)
+n_documents = 1
+df_term = 0
+
+idf = math.log(n_documents / df_term) -> ZeroDivisionError
+```
+Lets pretend we have a document containing that term and +1 df_term.
+
+If we only smoothed the document frequency, we will get an idf score of 0.
+```python
+#1 document with term with no counts (out of vocabulary)
+n_documents = 1
+df_term = 0
+
+assert math.log(n_documents /(1 + df_term)) == 0
+```
+
+Instead, we smooth both terms because:
+1. This ensures we do not get any zero division. 
+2. We are adding an addition 'document' that contains our term to the denominator, this document should be added to our count!
+
+```python
+#1 document with term with no counts (out of vocabulary)
+n_documents = 1
+df_term = 0
+
+assert  math.log((n_documents + 1) / (df_term + 1)) >= 0
+
+```
+
+These **smoothing** terms are optionally added to the calculation using the **"smooth_idf":True** parameter. 
+
+But wait, what if we have a term that appears in all documents, we can still get a zero idf score! 
+
+This will ultimately give us a 0 TF-IDF score for that term.
+
+Scikit-Learn adds an additional 1 to the IDF term so that we **never** get a 0 IDF term, even if the term appears in all documents. 
+```python
+#1 document with term with no counts (out of vocabulary)
+n_documents = 2
+df_term = 2
+
+assert math.log((1 + n_documents)/(1 + df_term)) + 1 == 1
+```
+
+Overall this will not change the relative vector relationships between our documents, but it will change the magnitude of the TF-IDF scores
 
 
 ## Process

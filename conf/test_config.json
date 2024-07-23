@@ -1,0 +1,7 @@
+{
+    "path": "data/documents.parquet",
+    "norm": "l1",
+    "smooth_idf": false,
+    "add_idf": false,
+    "output_path": null
+}

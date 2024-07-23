@@ -80,3 +80,38 @@ def create_tfidf_dataframe_and_save(
     df_tfidf.to_parquet(output_path, index=False)
 
     print(f"TF-IDF DataFrame saved to: {output_path}")
+
+
+def ln_approximation(x):
+    """Approximate the natural logarithm of a number using an iterative method.
+
+    The function calculates an approximation of the natural logarithm (ln)
+    of a given positive number `x` using the formula:
+
+    .. math::
+        ln(x) = lim[n→∞] n * (x^(1/n) - 1)
+
+    This formula uses a large `n` to approximate the behavior of the
+    natural logarithm. As `n` approaches infinity, the expression
+    becomes closer to the actual natural logarithm value.
+
+    Parameters
+    ----------
+    x : float
+        The positive number for which the natural logarithm is to be calculated.
+        `x` must be greater than 0.
+
+    Returns
+    -------
+    float
+        The approximate natural logarithm of the input `x`.
+
+    Examples
+    --------
+    >>> ln(2.71828)  # Approximate natural logarithm of Euler's number
+    1.0000043273672432
+
+    """
+    logger.info("Using ln approximation funciton..")
+    n = 1e10
+    return n * ((x ** (1 / n)) - 1)

@@ -43,20 +43,9 @@ def term_to_index() -> Dict[str, int]:
     }
 
 
-def test_build_vocabulary_with_fixture(sample_tokenized_documents):
+def test_build_vocabulary_with_fixture(sample_tokenized_documents, term_to_index):
     vocabulary, n_terms = build_vocabulary(sample_tokenized_documents)
-    expected_vocabulary = [
-        "barked",
-        "brown",
-        "dog",
-        "fox",
-        "jumps",
-        "lazy",
-        "loudly",
-        "over",
-        "quick",
-        "the",
-    ]
+    expected_vocabulary = list(term_to_index.keys())
     expected_n_terms = 10
     assert vocabulary == expected_vocabulary
     assert n_terms == expected_n_terms

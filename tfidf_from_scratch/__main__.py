@@ -47,8 +47,6 @@ def calculate_tfidf_bau(config: str):
             run_config = json.load(file)
             logger.info(f"Loaded config from file successfully.")
 
-    logger.info(f"Commencing TF-IDF calculation using config: {run_config}")
-
     tfidf_matrix, term_to_index = main_calculate_tfidf(run_config)
 
 
